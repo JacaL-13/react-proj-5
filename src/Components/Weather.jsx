@@ -5,18 +5,15 @@ import { useSelector } from 'react-redux'
 import { selectDisplay } from '../redux/slices/displayCountrySlice'
 
 const compass = {
-	N: 'North',
-	E: 'East',
-	S: 'South',
-	W: 'West',
-	NE: 'Northeast',
-	SE: 'Southeast',
-	SW: 'Southwest',
-	NW: 'Northwest'
+	N: 'north',
+	E: 'east',
+	S: 'south',
+	W: 'west'
 }
 
 const Weather = () => {
 	const [weather, setWeather] = useState({})
+	const [dirWords, setDirWords] = useState('')
 
 	const display = useSelector(selectDisplay)
 
@@ -37,8 +34,18 @@ const Weather = () => {
 		axios
 			.request(options)
 			.then(function (response) {
-				console.log(response.data)
 				setWeather(response.data)
+
+				const resDir = response.data.current.wind_dir
+				let resDirWords = ''
+				for (let i = 0; i < resDir.length; i++) {
+					resDirWords += compass[resDir[i]]
+
+                    if (resDir.length === 3 && i === 0) {
+                        resDirWords += '-'
+                    }
+                    setDirWords(resDirWords)
+				}
 			})
 			.catch(function (error) {
 				console.error(error)
@@ -71,8 +78,8 @@ const Weather = () => {
 				<tr>
 					<td>Wind Speed: </td>
 					<td>
-						{weather?.current?.wind_mph} mph {compass[weather?.current?.wind_dir]}
-                        {/* {weather.current.wind_dir} */}
+						{weather?.current?.wind_mph} mph {dirWords}
+						{/* {weather.current.wind_dir} */}
 					</td>
 				</tr>
 			</table>

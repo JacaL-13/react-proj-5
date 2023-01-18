@@ -5,8 +5,6 @@ function Overview(props) {
 	const currentDisplay = useSelector(selectDisplay)
 	const { name, population, capital, currencies } = currentDisplay
 
-	console.log(currentDisplay)
-
 	return (
 		<div className="stack">
 			<h2>{name.official}</h2>
@@ -23,8 +21,10 @@ function Overview(props) {
 					return (
 						<tr>
 							<td>Currencies:</td>
-							<td>{val.name} - </td>
-							<td>{key} - </td>
+							<td>{val.name} </td>
+							<td>Abbr:</td>
+							<td>{key} </td>
+							<td>Symbol:</td>
 							<td>{val.symbol}</td>
 						</tr>
 					)

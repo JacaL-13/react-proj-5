@@ -4,8 +4,6 @@ import { selectDisplay } from '../redux/slices/displayCountrySlice'
 function Symbols(props) {
 	const currentDisplay = useSelector(selectDisplay)
 
-	console.log(currentDisplay.coatOfArms.png)
-
 	return (
 		<div className="symbols">
 			<div className="stack">
