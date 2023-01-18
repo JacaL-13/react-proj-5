@@ -50,7 +50,7 @@ const Weather = () => {
 			.catch(function (error) {
 				console.error(error)
 			})
-	}, [])
+	}, [latitude, longitude])
 
 	// ------------------------------------
 	// PASTE RAPIDAPI CODE SNIPPET IN A USEEFFECT HERE
